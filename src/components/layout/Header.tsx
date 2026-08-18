@@ -20,14 +20,14 @@ export function Header() {
     }`;
 
   return (
-    <header className="bg-gradient-to-r from-amber-900 via-amber-800 to-amber-900 shadow-lg sticky top-0 z-50">
+    <header className="bg-gradient-to-r from-amber-700 via-amber-600 to-amber-700 shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16 sm:h-20 py-3 sm:py-4">
           {/* Logo */}
           <Link to="/menu" className="flex items-center space-x-3 group">
-            <div className="w-12 h-12 bg-amber-400 rounded-xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-200 shadow-lg">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-amber-300 to-amber-200 rounded-lg sm:rounded-xl flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200 shadow-md">
               <svg
-                className="w-8 h-8 text-amber-900"
+                className="w-6 h-6 sm:w-8 sm:h-8 text-amber-800"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -40,11 +40,13 @@ export function Header() {
                 />
               </svg>
             </div>
-            <div>
-              <span className="text-2xl font-bold text-amber-50 tracking-wide">
+            <div className="flex flex-col">
+              <span className="text-lg sm:text-xl lg:text-2xl font-bold text-amber-50 tracking-wide">
                 Cafe Delight
               </span>
-              <p className="text-xs text-amber-200 -mt-1">Fresh & Delicious</p>
+              <p className="text-[10px] sm:text-xs text-amber-100 font-medium">
+                Fresh & Delicious
+              </p>
             </div>
           </Link>
 
@@ -52,7 +54,7 @@ export function Header() {
           <nav className="flex items-center space-x-2">
             <Link to="/menu" className={navClasses("/menu")}>
               <svg
-                className="w-5 h-5 inline mr-1"
+                className="w-4 h-4 sm:w-5 sm:h-5 inline mr-1"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -64,12 +66,12 @@ export function Header() {
                   d="M4 6h16M4 10h16M4 14h16M4 18h16"
                 />
               </svg>
-              Menu
+              <span className="hidden sm:inline">Menu</span>
             </Link>
             <Link to="/cart" className={navClasses("/cart")}>
               <div className="relative">
                 <svg
-                  className="w-5 h-5 inline mr-1"
+                  className="w-4 h-4 sm:w-5 sm:h-5 inline mr-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -82,18 +84,16 @@ export function Header() {
                   />
                 </svg>
                 {totalItemCount > 0 && (
-                  <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center animate-pulse">
+                  <span className="absolute -top-2.5 -right-2.5 w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-red-500 to-red-600 text-white text-xs sm:text-[10px] font-bold rounded-full flex items-center justify-center shadow-lg border-2 border-white">
                     {totalItemCount}
                   </span>
                 )}
               </div>
-              Cart
+              <span className="hidden sm:inline">Cart</span>
             </Link>
           </nav>
         </div>
       </div>
-      {/* Decorative bottom border */}
-      <div className="h-1 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-400" />
     </header>
   );
 }

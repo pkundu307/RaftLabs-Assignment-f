@@ -13,7 +13,7 @@ import { CartList } from "@features/cart/components/CartList";
 import { CartSummary } from "@features/cart/components/CartSummary";
 import { ROUTES } from "@app/router";
 import type { CartItem } from "@features/cart/types";
-import { Navbar } from "@components/layout/Navbar";
+import { Header } from "@components/layout/Header";
 
 export function CartPage() {
   const navigate = useNavigate();
@@ -56,8 +56,8 @@ export function CartPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#FDF9F0]">
-        <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
+        <Header />
         <PageContainer>
           <div className="flex items-center justify-center py-24">
             <LoadingSpinner size="lg" />
@@ -69,10 +69,10 @@ export function CartPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#FDF9F0]">
-        <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
+        <Header />
         <PageContainer>
-          <div className="max-w-6xl mx-auto px-5 pt-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <ErrorMessage message="Unable to load your cart. Please try again." />
           </div>
         </PageContainer>
@@ -82,10 +82,10 @@ export function CartPage() {
 
   if (!cart || cart.items.length === 0) {
     return (
-      <div className="min-h-screen bg-[#FDF9F0]">
-        <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
+        <Header />
         <PageContainer title="Your Cart">
-          <div className="max-w-6xl mx-auto px-5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {errorState && (
               <div className="mb-6">
                 <ErrorMessage message={errorState} />
@@ -110,12 +110,12 @@ export function CartPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
-      <Navbar />
+      <Header />
       <PageContainer title="Your Shopping Cart">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <button
             onClick={() => navigate(ROUTES.MENU)}
-            className="flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-900 mb-8 transition-colors"
+            className="flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-900 mb-6 sm:mb-8 transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -129,9 +129,9 @@ export function CartPage() {
             </div>
           )}
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
             <div className="lg:col-span-2">
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 <CartList
                   items={cart.items}
                   onUpdateQuantity={handleUpdateQuantity}

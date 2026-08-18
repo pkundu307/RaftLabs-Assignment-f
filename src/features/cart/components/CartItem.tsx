@@ -41,29 +41,29 @@ export function CartItem({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-center gap-4 p-5 sm:p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 border border-amber-100">
+    <div className="flex flex-col sm:flex-row items-center gap-4 p-4 sm:p-5 bg-white rounded-xl sm:rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 border border-amber-100">
       <img
         src={item.imageUrl}
         alt={item.name}
-        className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-xl shadow-md"
+        className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg sm:rounded-xl shadow-sm"
       />
       <div className="flex-1 text-center sm:text-left w-full">
-        <h4 className="font-bold text-lg sm:text-xl text-amber-900 mb-1">{item.name}</h4>
-        <p className="text-amber-600 font-semibold text-lg">
+        <h4 className="font-bold text-base sm:text-lg lg:text-xl text-amber-900 mb-1">{item.name}</h4>
+        <p className="text-amber-600 font-semibold text-base sm:text-lg">
           {formatCurrency(item.price)}
         </p>
       </div>
-      <div className="flex items-center gap-2 bg-amber-50 rounded-xl p-2 sm:p-3">
+      <div className="flex items-center gap-2 bg-gradient-to-br from-amber-50 to-amber-100 rounded-lg sm:rounded-xl p-2 sm:p-3 shadow-inner">
         <Button
           onClick={handleDecrement}
           variant="secondary"
           size="sm"
           disabled={isUpdatingLocal || isUpdating}
-          className="w-9 h-9 sm:w-10 sm:h-10 p-0"
+          className="w-8 h-8 sm:w-9 sm:h-9 p-0 text-lg sm:text-xl"
         >
           -
         </Button>
-        <span className="w-10 text-center font-bold text-xl text-amber-900">
+        <span className="w-10 text-center font-bold text-lg sm:text-xl text-amber-900">
           {item.quantity}
         </span>
         <Button
@@ -71,18 +71,18 @@ export function CartItem({
           variant="secondary"
           size="sm"
           disabled={isUpdatingLocal || isUpdating}
-          className="w-9 h-9 sm:w-10 sm:h-10 p-0"
+          className="w-8 h-8 sm:w-9 sm:h-9 p-0 text-lg sm:text-xl"
         >
           +
         </Button>
       </div>
       <button
         onClick={() => onRemove(item.menuItemId)}
-        className="p-3 text-red-500 hover:bg-red-50 rounded-xl transition-colors group flex-shrink-0"
+        className="p-2.5 sm:p-3 text-red-500 hover:bg-red-50 rounded-lg sm:rounded-xl transition-colors group flex-shrink-0"
         aria-label="Remove item"
       >
         <svg
-          className="w-6 h-6 group-hover:scale-110 transition-transform"
+          className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

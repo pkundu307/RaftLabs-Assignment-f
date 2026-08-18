@@ -9,7 +9,7 @@ import { PageContainer } from "@components/layout/PageContainer";
 import { LoadingSpinner } from "@components/common/LoadingSpinner";
 import { ErrorMessage } from "@components/common/ErrorMessage";
 import { EmptyState } from "@components/common/EmptyState";
-import { Navbar } from "@components/layout/Navbar";
+import { Header } from "@components/layout/Header";
 
 export function MenuPage() {
   const cartId = storage.getCartId();
@@ -32,8 +32,8 @@ export function MenuPage() {
 
   if (menuLoading || cartLoading) {
     return (
-      <div className="min-h-screen bg-[#FDF9F0]">
-        <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
+        <Header />
         <PageContainer>
           <div className="flex items-center justify-center py-24">
             <LoadingSpinner size="lg" />
@@ -45,10 +45,10 @@ export function MenuPage() {
 
   if (menuError) {
     return (
-      <div className="min-h-screen bg-[#FDF9F0]">
-        <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
+        <Header />
         <PageContainer>
-          <div className="max-w-6xl mx-auto px-5 pt-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <ErrorMessage message="Unable to load the menu. Please try again." />
           </div>
         </PageContainer>
@@ -58,10 +58,10 @@ export function MenuPage() {
 
   if (!menu || menu.length === 0) {
     return (
-      <div className="min-h-screen bg-[#FDF9F0]">
-        <Navbar />
-        <PageContainer title="Menu">
-          <div className="max-w-6xl mx-auto px-5">
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
+        <Header />
+        <PageContainer title="Our Menu">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <EmptyState
               title="No menu items available"
               description="Check back later for our delicious offerings."
@@ -76,28 +76,28 @@ export function MenuPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
-      <Navbar />
+      <Header />
       <PageContainer title="Our Menu">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center mb-10">
-            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-3">
-              Fresh · Delicious · Fast Delivery
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+          <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+            <p className="text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-amber-700 mb-3">
+              FRESH · DELICIOUS · FAST DELIVERY
             </p>
-            <h2 className="text-4xl sm:text-5xl font-bold text-amber-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-amber-950 mb-3 sm:mb-4">
               What&apos;s Cooking Today
             </h2>
-            <p className="text-base text-amber-700 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base lg:text-lg text-amber-800 max-w-2xl mx-auto leading-relaxed">
               Explore our handcrafted menu featuring the finest ingredients and authentic recipes
             </p>
           </div>
 
           {error && (
-            <div className="mb-8">
+            <div className="mb-6 sm:mb-8">
               <ErrorMessage message={error} />
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {menu.map((item) => (
               <MenuCard
                 key={item.id}

@@ -8,7 +8,7 @@ import { ErrorMessage } from "@components/common/ErrorMessage";
 import { OrderTracker } from "@features/orders/components/OrderTracker";
 import { OrderSummary } from "@features/orders/components/OrderSummary";
 import { useState } from "react";
-import { Navbar } from "@components/layout/Navbar";
+import { Header } from "@components/layout/Header";
 import { Link } from "react-router-dom";
 import { ROUTES } from "@app/router";
 import { User, MapPin, Phone, Clock } from "lucide-react";
@@ -36,10 +36,10 @@ export function OrderTrackingPage() {
 
   if (!orderId) {
     return (
-      <div className="min-h-screen bg-[#FDF9F0]">
-        <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
+        <Header />
         <PageContainer>
-          <div className="max-w-6xl mx-auto px-5 pt-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <ErrorMessage message="Invalid order ID" />
           </div>
         </PageContainer>
@@ -49,8 +49,8 @@ export function OrderTrackingPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#FDF9F0]">
-        <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
+        <Header />
         <PageContainer>
           <div className="flex items-center justify-center py-24">
             <LoadingSpinner size="lg" />
@@ -62,10 +62,10 @@ export function OrderTrackingPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#FDF9F0]">
-        <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
+        <Header />
         <PageContainer>
-          <div className="max-w-6xl mx-auto px-5 pt-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <ErrorMessage message="Order not found" />
           </div>
         </PageContainer>
@@ -75,10 +75,10 @@ export function OrderTrackingPage() {
 
   if (!order) {
     return (
-      <div className="min-h-screen bg-[#FDF9F0]">
-        <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
+        <Header />
         <PageContainer>
-          <div className="max-w-6xl mx-auto px-5 pt-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <ErrorMessage message="Order not found" />
           </div>
         </PageContainer>
@@ -88,7 +88,7 @@ export function OrderTrackingPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
-      <Navbar />
+      <Header />
       <PageContainer title="Order Tracking">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="flex items-center justify-between flex-wrap gap-4 mb-8">

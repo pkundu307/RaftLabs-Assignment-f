@@ -35,11 +35,11 @@ export function CheckoutForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-gradient-to-br from-amber-50 to-white p-8 rounded-2xl shadow-xl border border-amber-200 space-y-5"
+      className="bg-gradient-to-br from-amber-50 via-white to-amber-50 p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-amber-200 space-y-4 sm:space-y-5"
     >
-      <div className="flex items-center mb-2">
+      <div className="flex items-center mb-4 sm:mb-5">
         <svg
-          className="w-6 h-6 text-amber-600 mr-2"
+          className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600 mr-2"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -57,7 +57,7 @@ export function CheckoutForm({
             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
           />
         </svg>
-        <h3 className="text-2xl font-bold text-amber-900">Delivery Details</h3>
+        <h3 className="text-xl sm:text-2xl font-bold text-amber-900">Delivery Details</h3>
       </div>
 
       {error && <ErrorMessage message={error} />}

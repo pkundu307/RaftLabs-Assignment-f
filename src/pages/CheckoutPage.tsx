@@ -11,7 +11,7 @@ import { CheckoutForm } from "@features/orders/components/CheckoutForm";
 import { OrderSummary } from "@features/orders/components/OrderSummary";
 import { ROUTES } from "@app/router";
 import type { CartItem } from "@features/cart/types";
-import { Navbar } from "@components/layout/Navbar";
+import { Header } from "@components/layout/Header";
 
 export function CheckoutPage() {
   const navigate = useNavigate();
@@ -49,8 +49,8 @@ export function CheckoutPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#FDF9F0]">
-        <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
+        <Header />
         <PageContainer>
           <div className="flex items-center justify-center py-24">
             <LoadingSpinner size="lg" />
@@ -62,10 +62,10 @@ export function CheckoutPage() {
 
   if (!cart || cart.items.length === 0) {
     return (
-      <div className="min-h-screen bg-[#FDF9F0]">
-        <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
+        <Header />
         <PageContainer>
-          <div className="max-w-6xl mx-auto px-5">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <EmptyState
               title="Your cart is empty"
               description="Add items to your cart before checking out."
@@ -87,12 +87,12 @@ export function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
-      <Navbar />
+      <Header />
       <PageContainer title="Complete Your Order">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           <button
             onClick={() => navigate(ROUTES.CART)}
-            className="flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-900 mb-8 transition-colors"
+            className="flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-900 mb-6 sm:mb-8 transition-colors"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -100,7 +100,7 @@ export function CheckoutPage() {
             Back to Cart
           </button>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             <div>
               <CheckoutForm
                 onSubmit={handleCheckout}
