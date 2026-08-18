@@ -12,7 +12,6 @@ import { OrderSummary } from "@features/orders/components/OrderSummary";
 import { ROUTES } from "@app/router";
 import type { CartItem } from "@features/cart/types";
 import { Navbar } from "@components/layout/Navbar";
-import { ChevronLeft } from "lucide-react";
 
 export function CheckoutPage() {
   const navigate = useNavigate();
@@ -87,23 +86,22 @@ export function CheckoutPage() {
   }));
 
   return (
-    <div className="min-h-screen bg-[#FDF9F0]">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
       <Navbar />
-      <PageContainer title="Checkout">
-        <div className="max-w-6xl mx-auto px-5 pb-20">
+      <PageContainer title="Complete Your Order">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <button
             onClick={() => navigate(ROUTES.CART)}
-            className="flex items-center gap-1 text-sm mb-6 text-neutral-500 hover:text-neutral-800 transition-colors"
+            className="flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-900 mb-8 transition-colors"
           >
-            <ChevronLeft size={16} /> Back to cart
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Cart
           </button>
 
-          <h1 className="text-3xl font-serif font-semibold text-neutral-900 mb-8">
-            Checkout
-          </h1>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="bg-white/60 rounded-2xl border border-neutral-200 p-4 sm:p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
               <CheckoutForm
                 onSubmit={handleCheckout}
                 isSubmitting={createOrderMutation.isPending}

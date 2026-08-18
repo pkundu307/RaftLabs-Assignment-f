@@ -27,15 +27,15 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantClasses = {
       primary:
-        "bg-gradient-to-r from-amber-600 to-amber-700 text-white hover:from-amber-700 hover:to-amber-800 focus:ring-amber-500 shadow-md hover:shadow-lg",
+        "bg-orange-600 text-white hover:bg-orange-700 focus:ring-orange-500 shadow-md hover:shadow-lg",
       secondary:
-        "bg-gradient-to-r from-amber-100 to-amber-200 text-amber-900 hover:from-amber-200 hover:to-amber-300 focus:ring-amber-500 shadow-sm",
+        "bg-neutral-100 text-neutral-900 hover:bg-neutral-200 focus:ring-orange-500 shadow-sm",
       danger:
-        "bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-600 hover:to-red-700 focus:ring-red-500 shadow-md",
+        "bg-red-600 text-white hover:bg-red-700 focus:ring-red-500 shadow-md",
       ghost:
-        "bg-transparent text-amber-800 hover:bg-amber-100 focus:ring-amber-500",
+        "bg-transparent text-orange-700 hover:bg-orange-50 focus:ring-orange-500",
       outline:
-        "border-2 border-amber-600 text-amber-600 hover:bg-amber-50 focus:ring-amber-500",
+        "border-2 border-orange-600 text-orange-700 hover:bg-orange-50 focus:ring-orange-500",
     };
 
     const sizeClasses = {

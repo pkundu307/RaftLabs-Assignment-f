@@ -1,16 +1,17 @@
 /* Custom styles index.css */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --color-coffee-dark: #3d291f;
-  --color-coffee-medium: #6f4e37;
-  --color-coffee-light: #a67b5b;
-  --color-cream: #f5e6d3;
-  --color-cream-light: #fef8f0;
-  --color-amber: #d4a574;
-  --color-gold: #c9a55c;
-  --color-text: #2d1f18;
-  --color-text-light: #6b5344;
+  --color-ink: #1c1917;
+  --color-ink-light: #4a4540;
+  --color-cream: #fdf9f0;
+  --color-cream-card: #fffbf3;
+  --color-border: #e7e2d6;
+  --color-accent: #ea580c;
+  --color-accent-dark: #c2410c;
+  --color-amber: #f59e0b;
+  --color-muted: #8a8178;
 }
 
 * {
@@ -24,10 +25,10 @@ html {
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: var(--color-text);
-  background-color: var(--color-cream-light);
+  color: var(--color-ink);
+  background-color: var(--color-cream);
   min-height: 100vh;
 }
 
@@ -35,14 +36,18 @@ body {
   min-height: 100vh;
 }
 
+h1, h2, h3, h4 {
+  font-family: "Fraunces", Georgia, serif;
+}
+
 a {
-  color: var(--color-coffee-medium);
+  color: var(--color-accent);
   text-decoration: none;
   transition: color 0.2s;
 }
 
 a:hover {
-  color: var(--color-coffee-dark);
+  color: var(--color-accent-dark);
 }
 
 button {
@@ -54,10 +59,9 @@ input, textarea, select {
   font-family: inherit;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
+/* NOTE: intentionally no global `img { max-width: 100%; height: auto }` rule.
+   Tailwind's preflight already resets images sensibly, and a blanket rule here
+   risks fighting fixed-height thumbnails (h-56 + object-cover) used in cards. */
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
@@ -66,14 +70,14 @@ img {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-cream);
+  background: var(--color-border);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-coffee-medium);
+  background: var(--color-accent);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-coffee-dark);
+  background: var(--color-accent-dark);
 }

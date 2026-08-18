@@ -11,17 +11,7 @@ import { useState } from "react";
 import { Navbar } from "@components/layout/Navbar";
 import { Link } from "react-router-dom";
 import { ROUTES } from "@app/router";
-import { ChevronLeft, User, MapPin, Phone, Hash, Clock } from "lucide-react";
-
-function getStatusLabel(status: string): string {
-  const labels: Record<string, string> = {
-    ORDER_RECEIVED: "Order Received",
-    PREPARING: "Preparing",
-    OUT_FOR_DELIVERY: "Out for Delivery",
-    DELIVERED: "Delivered",
-  };
-  return labels[status] || status;
-}
+import { User, MapPin, Phone, Clock } from "lucide-react";
 
 export function OrderTrackingPage() {
   const { orderId } = useParams<{ orderId: string }>();
@@ -97,89 +87,96 @@ export function OrderTrackingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FDF9F0]">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
       <Navbar />
       <PageContainer title="Order Tracking">
-        <div className="max-w-6xl mx-auto px-5 pb-20">
-          <Link
-            to={ROUTES.MENU}
-            className="flex items-center gap-1 text-sm mb-6 text-neutral-500 hover:text-neutral-800 transition-colors w-fit"
-          >
-            <ChevronLeft size={16} /> Back to menu
-          </Link>
-
-          <div className="flex items-center justify-between flex-wrap gap-2 mb-8">
-            <h1 className="text-3xl font-serif font-semibold text-neutral-900">
-              Order Tracking
-            </h1>
-            <span className="text-xs px-3 py-1.5 rounded-full font-mono bg-neutral-200 text-neutral-600">
-              #{order.id}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex items-center justify-between flex-wrap gap-4 mb-8">
+            <Link
+              to={ROUTES.MENU}
+              className="flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-900 transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to Menu
+            </Link>
+            <span className="text-xs px-4 py-2 rounded-full font-mono bg-amber-200 text-amber-800 font-semibold">
+              Order #{order.id.slice(0, 8)}
             </span>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <div className="space-y-6">
-              <div className="bg-white/60 rounded-2xl border border-neutral-200 p-4 sm:p-6">
-                <OrderTracker status={order.status} />
-              </div>
+              <OrderTracker status={order.status} />
 
-              <div className="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm">
-                <h3 className="text-sm font-semibold uppercase tracking-wide text-neutral-900 mb-4">
+              <div className="bg-white p-6 rounded-2xl shadow-md border border-amber-100">
+                <h3 className="text-lg font-bold text-amber-900 mb-5 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
                   Delivery Details
                 </h3>
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-center gap-2.5">
-                    <User size={15} className="text-neutral-400 shrink-0" />
-                    <span className="text-neutral-700">
-                      {order.customer.name}
-                    </span>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                      <User className="w-4 h-4 text-amber-700" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-amber-600 uppercase tracking-wide font-semibold">Name</p>
+                      <p className="text-base text-amber-900 font-medium">{order.customer.name}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2.5">
-                    <MapPin size={15} className="text-neutral-400 shrink-0" />
-                    <span className="text-neutral-700">
-                      {order.customer.address}
-                    </span>
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                      <MapPin className="w-4 h-4 text-amber-700" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-amber-600 uppercase tracking-wide font-semibold">Address</p>
+                      <p className="text-base text-amber-900 font-medium">{order.customer.address}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2.5">
-                    <Phone size={15} className="text-neutral-400 shrink-0" />
-                    <span className="text-neutral-700">
-                      {order.customer.phone}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2.5">
-                    <Hash size={15} className="text-neutral-400 shrink-0" />
-                    <span className="text-neutral-700 text-xs break-all">
-                      {order.id}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2.5">
-                    <Clock size={15} className="text-neutral-400 shrink-0" />
-                    <span className="text-neutral-700">
-                      {getStatusLabel(order.status)}
-                    </span>
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-4 h-4 text-amber-700" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-amber-600 uppercase tracking-wide font-semibold">Phone</p>
+                      <p className="text-base text-amber-900 font-medium">{order.customer.phone}</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div>
-              <div className="lg:sticky lg:top-24 space-y-6">
-                <OrderSummary items={order.items} total={order.totalAmount} />
+            <div className="lg:sticky lg:top-24 space-y-6">
+              <OrderSummary items={order.items} total={order.totalAmount} />
 
-                <div className="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm">
-                  <h3 className="text-sm font-semibold uppercase tracking-wide text-neutral-900 mb-3">
-                    Order Timeline
-                  </h3>
-                  <div className="text-sm text-neutral-600 space-y-1">
+              <div className="bg-white p-6 rounded-2xl shadow-md border border-amber-100">
+                <h3 className="text-lg font-bold text-amber-900 mb-4 flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  Order Timeline
+                </h3>
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-start gap-3 pb-3 border-b border-amber-100">
+                    <Clock className="w-5 h-5 text-amber-600 mt-0.5" />
                     <div>
-                      Created: {new Date(order.createdAt).toLocaleString()}
+                      <p className="text-xs text-amber-600 uppercase tracking-wide font-semibold">Order Placed</p>
+                      <p className="text-amber-900">{new Date(order.createdAt).toLocaleString()}</p>
                     </div>
-                    {order.updatedAt !== order.createdAt && (
-                      <div>
-                        Updated: {new Date(order.updatedAt).toLocaleString()}
-                      </div>
-                    )}
                   </div>
+                  {order.updatedAt !== order.createdAt && (
+                    <div className="flex items-start gap-3">
+                      <Clock className="w-5 h-5 text-amber-600 mt-0.5" />
+                      <div>
+                        <p className="text-xs text-amber-600 uppercase tracking-wide font-semibold">Last Updated</p>
+                        <p className="text-amber-900">{new Date(order.updatedAt).toLocaleString()}</p>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

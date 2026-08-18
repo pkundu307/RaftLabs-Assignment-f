@@ -14,14 +14,13 @@ import { CartSummary } from "@features/cart/components/CartSummary";
 import { ROUTES } from "@app/router";
 import type { CartItem } from "@features/cart/types";
 import { Navbar } from "@components/layout/Navbar";
-import { ChevronLeft } from "lucide-react";
 
 export function CartPage() {
   const navigate = useNavigate();
   const cartId = storage.getCartId();
   const { data: cart, isLoading, error } = useCart(cartId);
-  const updateCartItemMutation = useUpdateCartItem();
-  const removeCartItemMutation = useRemoveCartItem();
+  const updateCartItemMutation = useUpdateCartItem(cartId);
+  const removeCartItemMutation = useRemoveCartItem(cartId);
 
   const [errorState, setErrorState] = useState<string | null>(null);
 
@@ -32,7 +31,6 @@ export function CartPage() {
     setErrorState(null);
     try {
       await updateCartItemMutation.mutateAsync({
-        cartId,
         menuItemId,
         data: { quantity },
       });
@@ -45,7 +43,6 @@ export function CartPage() {
     setErrorState(null);
     try {
       await removeCartItemMutation.mutateAsync({
-        cartId,
         menuItemId,
       });
     } catch (err) {
@@ -112,20 +109,19 @@ export function CartPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#FDF9F0]">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
       <Navbar />
-      <PageContainer title="Your Cart">
-        <div className="max-w-6xl mx-auto px-5 pb-20">
+      <PageContainer title="Your Shopping Cart">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <button
             onClick={() => navigate(ROUTES.MENU)}
-            className="flex items-center gap-1 text-sm mb-6 text-neutral-500 hover:text-neutral-800 transition-colors"
+            className="flex items-center gap-2 text-sm font-medium text-amber-700 hover:text-amber-900 mb-8 transition-colors"
           >
-            <ChevronLeft size={16} /> Back to menu
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Continue Shopping
           </button>
-
-          <h1 className="text-3xl font-serif font-semibold text-neutral-900 mb-8">
-            Your Cart
-          </h1>
 
           {errorState && (
             <div className="mb-6">
@@ -133,9 +129,9 @@ export function CartPage() {
             </div>
           )}
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <div className="bg-white/60 rounded-2xl border border-neutral-200 p-4 sm:p-6">
+              <div className="space-y-4">
                 <CartList
                   items={cart.items}
                   onUpdateQuantity={handleUpdateQuantity}

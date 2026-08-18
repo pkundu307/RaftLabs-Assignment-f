@@ -4,7 +4,7 @@ import { useMenu } from "@features/menu/hooks/useMenu";
 import { useCart } from "@features/cart/hooks/useCart";
 import { storage } from "@lib/storage";
 import { useAddToCart } from "@features/cart/hooks/useCart";
-import { MenuList } from "@features/menu/components/MenuList";
+import { MenuCard } from "@features/menu/components/MenuCard";
 import { PageContainer } from "@components/layout/PageContainer";
 import { LoadingSpinner } from "@components/common/LoadingSpinner";
 import { ErrorMessage } from "@components/common/ErrorMessage";
@@ -15,7 +15,7 @@ export function MenuPage() {
   const cartId = storage.getCartId();
   const { isLoading: cartLoading } = useCart(cartId);
   const { data: menu, isLoading: menuLoading, error: menuError } = useMenu();
-  const addToCartMutation = useAddToCart();
+  const addToCartMutation = useAddToCart(cartId);
 
   const [error, setError] = useState<string | null>(null);
 
@@ -23,7 +23,6 @@ export function MenuPage() {
     setError(null);
     try {
       await addToCartMutation.mutateAsync({
-        cartId,
         data: { menuItemId, quantity: 1 },
       });
     } catch (err) {
@@ -76,36 +75,37 @@ export function MenuPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FDF9F0]">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-amber-100 to-amber-50">
       <Navbar />
-      <PageContainer title="Menu">
-        <div className="max-w-6xl mx-auto px-5 pb-20">
-          <div className="pt-10 pb-8">
-            <p className="text-xs tracking-[0.2em] uppercase text-orange-700 mb-2">
-              Open till late · Delivered hot
+      <PageContainer title="Our Menu">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold tracking-widest uppercase text-amber-700 mb-3">
+              Fresh · Delicious · Fast Delivery
             </p>
-            <h1 className="text-4xl sm:text-5xl font-serif font-semibold text-neutral-900 mb-3">
-              Fire-kissed street food,
-              <br className="hidden sm:block" /> dropped at your door.
-            </h1>
-            <p className="text-sm max-w-md text-neutral-500">
-              A rotating lineup of the best night-market dishes from around
-              the world, cooked to order.
+            <h2 className="text-4xl sm:text-5xl font-bold text-amber-900 mb-4">
+              What&apos;s Cooking Today
+            </h2>
+            <p className="text-base text-amber-700 max-w-2xl mx-auto">
+              Explore our handcrafted menu featuring the finest ingredients and authentic recipes
             </p>
           </div>
 
           {error && (
-            <div className="mb-6">
+            <div className="mb-8">
               <ErrorMessage message={error} />
             </div>
           )}
 
-          <div className="bg-white/60 rounded-2xl border border-neutral-200 p-4 sm:p-6">
-            <MenuList
-              items={menu}
-              onAddToCart={handleAddToCart}
-              isAdding={addToCartMutation.isPending}
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {menu.map((item) => (
+              <MenuCard
+                key={item.id}
+                item={item}
+                onAddToCart={handleAddToCart}
+                isAdding={addToCartMutation.isPending && addToCartMutation.variables?.data.menuItemId === item.id}
+              />
+            ))}
           </div>
         </div>
       </PageContainer>

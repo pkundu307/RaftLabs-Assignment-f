@@ -41,25 +41,25 @@ export function CartItem({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-center gap-4 p-5 bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow border border-amber-100">
+    <div className="flex flex-col sm:flex-row items-center gap-4 p-5 sm:p-6 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-200 border border-amber-100">
       <img
         src={item.imageUrl}
         alt={item.name}
-        className="w-24 h-24 object-cover rounded-xl shadow-md"
+        className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-xl shadow-md"
       />
-      <div className="flex-1 text-center sm:text-left">
-        <h4 className="font-bold text-lg text-amber-900 mb-1">{item.name}</h4>
+      <div className="flex-1 text-center sm:text-left w-full">
+        <h4 className="font-bold text-lg sm:text-xl text-amber-900 mb-1">{item.name}</h4>
         <p className="text-amber-600 font-semibold text-lg">
           {formatCurrency(item.price)}
         </p>
       </div>
-      <div className="flex items-center gap-2 bg-amber-50 rounded-xl p-2">
+      <div className="flex items-center gap-2 bg-amber-50 rounded-xl p-2 sm:p-3">
         <Button
           onClick={handleDecrement}
           variant="secondary"
           size="sm"
           disabled={isUpdatingLocal || isUpdating}
-          className="w-10 h-10 p-0"
+          className="w-9 h-9 sm:w-10 sm:h-10 p-0"
         >
           -
         </Button>
@@ -71,14 +71,14 @@ export function CartItem({
           variant="secondary"
           size="sm"
           disabled={isUpdatingLocal || isUpdating}
-          className="w-10 h-10 p-0"
+          className="w-9 h-9 sm:w-10 sm:h-10 p-0"
         >
           +
         </Button>
       </div>
       <button
         onClick={() => onRemove(item.menuItemId)}
-        className="p-3 text-red-500 hover:bg-red-50 rounded-xl transition-colors group"
+        className="p-3 text-red-500 hover:bg-red-50 rounded-xl transition-colors group flex-shrink-0"
         aria-label="Remove item"
       >
         <svg
